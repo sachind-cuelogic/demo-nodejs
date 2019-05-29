@@ -1,0 +1,7 @@
+node_modules
+log
+dist
+package-lock.json
+src/v1/components/document/controllers/attachments.zip
+# devops testing
+.scannerwork
