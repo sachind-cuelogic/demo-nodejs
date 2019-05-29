@@ -32,7 +32,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 // adding morgan to log HTTP requests
-app.use(morgan('combined'));
+app.use(morgan(function (tokens, req, res) {
+    return JSON.stringify({
+        "remote-addr": tokens["remote-addr"](req, res),
+        "remote-user": tokens["remote-user"](req, res),
+        "method": tokens.method(req, res),
+        "url": tokens.url(req, res),
+        "http-version": tokens["http-version"](req, res),
+        "status": tokens.status(req, res),
+        "res-content-length": tokens.res(req, res, "content-length"),
+        "referrer": tokens.referrer(req, res),
+        "user-agent": tokens["user-agent"](req, res),
+        "response-time": tokens["response-time"](req, res) + "ms"
+    });
+}));
 
 app.get('/ping', (req, res) => {
     res.send(`{
