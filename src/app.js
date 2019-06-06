@@ -7,7 +7,7 @@ import morgan from 'morgan';
 import routes from './v1/routes/routes';
 import nconf from "nconf";
 import path from "path";
-
+import mysql from 'mysql';
 
 nconf.argv()
     .env()
